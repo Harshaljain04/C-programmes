@@ -1,78 +1,82 @@
-#include<stdio.h>
-#include<stdlib.h>
-#define x 40
-
-int rear=-1, front=-1;
-int queue[x];
-
-void enqueue()
+#include <stdio.h>
+# define SIZE 100
+void enqueue();
+void dequeue();
+void show();
+int inp_arr[SIZE];
+int Rear = - 1;
+int Front = - 1;
+main()
 {
-    if(rear==x-1)
-    printf("Overflow!");
-    else
-    {
-        if(front==-1)
-        {
-            front++;
-            rear++;
-        }
-        else
-        {rear++;}
-        printf("Enter Element :- ");
-        scanf("%d",&queue[rear]);
-    }
-}
-void dequeue()
-{
-    if(front==-1)
-    printf("Underflow!");
-    else
-    printf("%d is deleted",queue[front]);   
-    front++;
-    if(front>rear)
-    {
-        front=-1;
-        rear=-1;
-    }
-}
-void display()
-{
-    if(front==-1)
-    printf("Underflow!");
-    else
-    {
-        for(int i=front;i<=rear;i++)
-        printf("%d ",queue[i]);
-    }
-    printf("\n");
-}
-int main()
-{
-    int choice;
-
+    int ch;
     while (1)
     {
-        printf("\nPerform operations on the stack:");
-        printf("\n1.Enqueue\n2.Dequeue\n3.Display\n4.Exit");
-        printf("\n\nEnter the choice: ");
-        scanf("%d", &choice);
-        
-        switch (choice)
+        printf("1.Enqueue Operation\n");
+        printf("2.Dequeue Operation\n");
+        printf("3.Display the Queue\n");
+        printf("4.Exit\n");
+        printf("Enter your choice of operations : ");
+        scanf("%d", &ch);
+        switch (ch)
         {
-        case 1:
+            case 1:
             enqueue();
             break;
-        case 2:
+            case 2:
             dequeue();
             break;
-        case 3:
-            display();
+            case 3:
+            show();
             break;
-        case 4:
+            case 4:
             exit(0);
-            break;
-        default:
-            printf("\nInvalid choice!!");
-        }
-    }    
+            default:
+            printf("Incorrect choice \n");
+        } 
+    } 
+} 
+ 
+void enqueue()
+{
+    int insert_item;
+    if (Rear == SIZE - 1)
+       printf("Overflow \n");
+    else
+    {
+        if (Front == - 1)
+      
+        Front = 0;
+        printf("Element to be inserted in the Queue\n : ");
+        scanf("%d", &insert_item);
+        Rear = Rear + 1;
+        inp_arr[Rear] = insert_item;
+    }
+} 
+ 
+void dequeue()
+{
+    if (Front == - 1 || Front > Rear)
+    {
+        printf("Underflow \n");
+        return ;
+    }
+    else
+    {
+        printf("Element deleted from the Queue: %d\n", inp_arr[Front]);
+        Front = Front + 1;
+    }
+} 
+ 
+void show()
+{
+    
+    if (Front == - 1)
+        printf("Empty Queue \n");
+    else
+    {
+        printf("Queue: \n");
+        for (int i = Front; i <= Rear; i++)
+            printf("%d ", inp_arr[i]);
+        printf("\n");
+    }
 }
